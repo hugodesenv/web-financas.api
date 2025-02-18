@@ -1,0 +1,20 @@
+{
+  "dependencies": {
+    "@fastify/jwt": "^9.0.4",
+    "@prisma/client": "^6.3.1",
+    "@sinclair/typebox": "^0.34.25",
+    "dotenv": "^16.4.7",
+    "fastify": "^5.2.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.13.4",
+    "nodemon": "^3.1.9",
+    "prisma": "^6.3.1",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.3"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "start": "nodemon index.ts"
+  }
+}
