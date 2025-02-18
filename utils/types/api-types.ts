@@ -7,3 +7,9 @@ export const ApiResponse = Type.Object({
 });
 
 export type ApiResponseType = Static<typeof ApiResponse>;
+
+export interface IApiResponse {
+  success: boolean,
+  message: string,
+  data: any
+}
