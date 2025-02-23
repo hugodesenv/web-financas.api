@@ -1,7 +1,7 @@
 import { FastifyInstance } from "fastify";
-import { UserCase } from "../use-cases/user-case";
-import { ApiResponse, ApiResponseType } from "../utils/types/api-types";
-import { UserAuth, UserAuthType } from "../utils/types/user-types";
+import { UserCase } from "./user-case";
+import { ApiResponse, ApiResponseType } from "../../utils/api-types";
+import { UserAuth, UserAuthType } from "./user-types";
 
 export function userRoute(app: FastifyInstance) {
   app.post<{ Body: UserAuthType, Reply: ApiResponseType }>('/auth', {

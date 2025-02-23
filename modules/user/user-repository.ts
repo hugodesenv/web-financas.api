@@ -1,7 +1,6 @@
 import { PrismaClient } from '@prisma/client';
-import { BaseRepository } from './base-repository';
 
-export class UserRepository extends BaseRepository {
+export class UserRepository {
 
   /**
    * Result if the user is present in database
