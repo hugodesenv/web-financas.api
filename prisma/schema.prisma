@@ -14,7 +14,13 @@ datasource db {
 }
 
 model User {
-  username  String   @unique @db.Char(40)
+  username  String   @id @unique @db.Char(40)
   password  String   @db.VarChar()
   createdAt DateTime @default(now())
+}
+
+model Person {
+  id       String @id @default(uuid())
+  name     String @db.Char(80)
+  nickname String @db.Char(80)
 }

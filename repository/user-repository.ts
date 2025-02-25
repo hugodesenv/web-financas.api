@@ -1,13 +1,8 @@
 import { PrismaClient } from '@prisma/client';
+import { IUserRepository } from '../types/user-type';
 
-export class UserRepository {
+export class UserRepository implements IUserRepository {
 
-  /**
-   * Result if the user is present in database
-   * @param username 
-   * @param password 
-   * @returns boolean to represent if the user was found
-   */
   async userExists(username: string, password: string): Promise<boolean> {
     const prisma = new PrismaClient();
     try {

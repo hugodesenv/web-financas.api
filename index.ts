@@ -3,8 +3,8 @@ import fastify, { FastifyInstance } from "fastify";
 import OpenAI from "openai";
 import { authMiddleware } from "./middlewares/auth-middleware";
 import { rules_system } from "./modules/openAI/openAI-schemas";
-import { userRoute } from "./modules/user/user-route";
-import { API_CONFIG, JWT_SECRET } from "./utils/lib/env-utils";
+import { userRoute } from "./routes/user-route";
+import { API_CONFIG, JWT_SECRET } from "./utils/lib/env-util";
 
 const app = fastify();
 const { openai_key, port } = API_CONFIG();

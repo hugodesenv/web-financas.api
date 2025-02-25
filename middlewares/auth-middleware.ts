@@ -1,5 +1,5 @@
 import { FastifyReply, FastifyRequest, HookHandlerDoneFunction } from "fastify";
-import { IApiResponse } from "../utils/api-types";
+import { IApiResponse } from "../types/api-type";
 
 export async function authMiddleware(req: FastifyRequest, rep: FastifyReply) {
   try {
