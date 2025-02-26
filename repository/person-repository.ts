@@ -1,9 +1,17 @@
+import { pubStorage } from "../context/async-storage-context";
 import { IApiResponse } from "../types/api-type";
 import { IPersonRepository } from "../types/person-type";
 
 export class PersonRepository implements IPersonRepository {
-  createPerson(person: { name: string; id: string; nickname: string; }): Promise<IApiResponse> {
-    throw new Error("Method not implemented.");
+  async createPerson(person: { name: string; id: string; nickname: string; }): Promise<IApiResponse> {
+    const test = pubStorage.get();
+    console.log('we got...', test);
+
+    return {
+      data: '',
+      message: '',
+      success: true,
+    }
   }
 
   updatePerson(person: { name: string; id: string; nickname: string; }): Promise<IApiResponse> {
@@ -14,6 +22,3 @@ export class PersonRepository implements IPersonRepository {
     throw new Error("Method not implemented.");
   }
 }
-
-By Hugo Souza
-Lets create the CRUD from the persona and the next step, to implement the test.

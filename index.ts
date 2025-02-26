@@ -2,9 +2,11 @@ import fastifyJwt from "@fastify/jwt";
 import fastify, { FastifyInstance } from "fastify";
 import OpenAI from "openai";
 import { authMiddleware } from "./middlewares/auth-middleware";
-import { rules_system } from "./modules/openAI/openAI-schemas";
-import { userRoute } from "./routes/user-route";
-import { API_CONFIG, JWT_SECRET } from "./utils/lib/env-util";
+import { createPersonRoute } from "./routes/person/create-person-route";
+import { authenticationUserRoute } from "./routes/user/authentication-user-route";
+import { rules_system } from "./types/openAI-type";
+import { API_CONFIG, JWT_SECRET } from "./utils/env-util";
+import { pubStorage } from "./context/async-storage-context";
 
 const app = fastify();
 const { openai_key, port } = API_CONFIG();
@@ -14,14 +16,20 @@ app.register(fastifyJwt, { secret: JWT_SECRET() });
 // Setting OpenAI
 const openai = new OpenAI({ apiKey: openai_key });
 
+// Global context
+app.addHook('onRequest', (_, __, next) => {
+  pubStorage.run({}, async () => next())
+});
+
 // Private routes
 const privateRoutes = async (fastify: FastifyInstance, _opts: any) => {
   fastify.addHook('preHandler', authMiddleware);
-  fastify.register(userRoute, { prefix: '/user' });
+  fastify.register(createPersonRoute, { prefix: '/person' });
 };
 
 // Public routes
 const publicRoutes = (fastify: FastifyInstance, _opts: any) => {
+  fastify.register(authenticationUserRoute, { prefix: '/user' });
 
   /** By HUGO SOUZA - Studying about openAI API.
    * In this case, the user pass a rule to the API to create a SQL of clients.
