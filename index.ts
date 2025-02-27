@@ -23,7 +23,7 @@ app.addHook('onRequest', (_, __, next) => {
 
 // Private routes
 const privateRoutes = async (fastify: FastifyInstance, _opts: any) => {
-  fastify.addHook('preHandler', authMiddleware);
+  fastify.addHook('preHandler', (req: any, res: any, next: any) => { authMiddleware(req, res, next) });
   fastify.register(createPersonRoute, { prefix: '/person' });
 };
 

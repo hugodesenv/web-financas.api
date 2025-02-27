@@ -1,4 +1,5 @@
 import { Static, Type } from "@sinclair/typebox";
+import { IPayloadJWT } from "./user-type";
 
 export const ApiResponse = Type.Object({
   success: Type.Boolean(),
@@ -17,5 +18,6 @@ export interface IApiResponse {
 }
 
 export interface IPubStorage {
-  createdAt: Date
+  currentEndpoint: string;
+  tokenPayload: IPayloadJWT
 }

@@ -5,4 +5,9 @@ export interface IUserRepository {
   userExists(username: string, password: string): Promise<boolean>;
 };
 
+export interface IPayloadJWT {
+  username: string,
+  createdAt: Date
+}
+
 export type UserAuthType = Static<typeof UserAuth>;

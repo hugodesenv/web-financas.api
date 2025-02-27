@@ -3,6 +3,7 @@ import { IApiResponse } from "../types/api-type";
 import { IPersonRepository } from "../types/person-type";
 
 export class PersonRepository implements IPersonRepository {
+
   async createPerson(person: { name: string; id: string; nickname: string; }): Promise<IApiResponse> {
     const test = pubStorage.get();
     console.log('we got...', test);

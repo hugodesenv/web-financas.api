@@ -1,8 +1,8 @@
 import { FastifyInstance } from "fastify";
 import { UserAuth } from "../../schemas/user/user-auth-schema";
 import { ApiResponse, ApiResponseType, IApiResponse } from "../../types/api-type";
+import { IPayloadJWT, UserAuthType } from "../../types/user-type";
 import { AuthenticationUserUseCase } from "../../use-cases/user/authentication-user-use-case";
-import { UserAuthType } from "../../types/user-type";
 
 export function authenticationUserRoute(app: FastifyInstance) {
   app.post<{ Body: UserAuthType, Reply: ApiResponseType }>('/auth', {
@@ -25,7 +25,7 @@ export function authenticationUserRoute(app: FastifyInstance) {
       });
     }
 
-    const lTokenPayload = {
+    const lTokenPayload: IPayloadJWT = {
       username: user,
       createdAt: new Date()
     }
