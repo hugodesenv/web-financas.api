@@ -1,5 +1,5 @@
 import { FastifyInstance } from "fastify";
-import { UserAuth } from "../../schemas/user/user-auth-schema";
+import { UserAuth } from "../../schemas/user-schema";
 import { ApiResponse, ApiResponseType, IApiResponse } from "../../types/api-type";
 import { IPayloadJWT, UserAuthType } from "../../types/user-type";
 import { AuthenticationUserUseCase } from "../../use-cases/user/authentication-user-use-case";

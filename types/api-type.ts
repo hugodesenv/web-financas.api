@@ -1,5 +1,7 @@
+import { PrismaClient } from "@prisma/client";
 import { Static, Type } from "@sinclair/typebox";
 import { IPayloadJWT } from "./user-type";
+import { ConnectDbUseCase } from "../use-cases/db/connect.db.use.case";
 
 export const ApiResponse = Type.Object({
   success: Type.Boolean(),
@@ -19,5 +21,6 @@ export interface IApiResponse {
 
 export interface IPubStorage {
   currentEndpoint: string;
-  tokenPayload: IPayloadJWT
+  tokenPayload: IPayloadJWT,
+  db: ConnectDbUseCase
 }

@@ -1,5 +1,5 @@
 import { Static } from "@sinclair/typebox";
-import { UserAuth } from "../schemas/user/user-auth-schema";
+import { UserAuth } from "../schemas/user-schema";
 
 export interface IUserRepository {
   userExists(username: string, password: string): Promise<boolean>;

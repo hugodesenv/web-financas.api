@@ -10,10 +10,8 @@ export const pubStorage = {
   },
   set: (pub: IPubStorage) => {
     _asyncLocalStorage.enterWith(pub);
-    console.log('aqui no set', _asyncLocalStorage.getStore())
   },
   get: (): Partial<IPubStorage> => {
-    console.log('aqui no get', _asyncLocalStorage.getStore())
     return _asyncLocalStorage.getStore() ?? {};
   },
 }

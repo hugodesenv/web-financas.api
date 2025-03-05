@@ -2,6 +2,7 @@ import { FastifyReply, FastifyRequest } from "fastify";
 import { pubStorage } from "../context/async-storage-context";
 import { IApiResponse } from "../types/api-type";
 import { IPayloadJWT } from "../types/user-type";
+import { ConnectDbUseCase } from "../use-cases/db/connect.db.use.case";
 
 export async function authMiddleware(req: FastifyRequest, rep: FastifyReply, next: (err?: Error) => void) {
   try {
@@ -9,11 +10,12 @@ export async function authMiddleware(req: FastifyRequest, rep: FastifyReply, nex
 
     pubStorage.set({
       currentEndpoint: req.url,
-      tokenPayload
+      tokenPayload,
+      db: new ConnectDbUseCase(),
     });
 
     next();
   } catch (e) {
-    return rep.status(401).send({ success: false, data: 'Invalid token!' } as IApiResponse);
+    return rep.status(401).send(<IApiResponse>{ success: false, data: 'Invalid token!' });
   }
 }
