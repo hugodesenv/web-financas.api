@@ -15,11 +15,25 @@ export class PersonRepository implements IPersonRepository {
     return personCreated?.id || "";
   }
 
-  updatePerson(person: { name: string; id: string; nickname: string; }): Promise<void> {
-    throw new Error("Method not implemented.");
+  async updatePerson(person: Person): Promise<boolean> {
+    try {
+      await pubStorage.get().db?.dbClient.person.update({
+        where: {
+          id: person.id
+        },
+        data: {
+          name: person.name,
+          nickname: person.nickname
+        }
+      });
+
+      return true;
+    } catch (e) {
+      return false;
+    }
   }
 
-  removePerson(id: string): Promise<void> {
-    throw new Error("Method not implemented.");
+  async removePerson(id: string): Promise<void> {
+    await pubStorage.get().db?.dbClient.person.delete({ where: { id } });
   }
 }

@@ -8,7 +8,11 @@ import { CreatePersonSchema } from './../../schemas/person-schema';
 export function createPersonRoute(app: FastifyInstance) {
 
   app.post<{ Body: CreatePersonType }>('/', {
-    schema: CreatePersonSchema
+    schema: {
+      description: 'Create person',
+      tags: ['person'],
+      body: CreatePersonSchema,
+    }
   }, async (request: FastifyRequest<{ Body: CreatePersonType }>, reply: FastifyReply) => {
     try {
       const lCreate = new CreatePersonUseCase(new PersonRepository());

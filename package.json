@@ -1,15 +1,18 @@
 {
   "dependencies": {
     "@fastify/jwt": "^9.0.4",
+    "@fastify/swagger": "^9.4.2",
+    "@fastify/swagger-ui": "^5.2.2",
     "@google/generative-ai": "^0.22.0",
     "@prisma/adapter-pg": "^6.4.1",
     "@prisma/client": "^6.3.1",
-    "@sinclair/typebox": "^0.34.25",
     "@types/pg": "^8.11.11",
     "dotenv": "^16.4.7",
     "fastify": "^5.2.1",
+    "fastify-type-provider-zod": "^4.0.2",
     "openai": "^4.85.4",
-    "pg": "^8.13.3"
+    "pg": "^8.13.3",
+    "zod": "^3.24.2"
   },
   "devDependencies": {
     "@types/node": "^22.13.4",

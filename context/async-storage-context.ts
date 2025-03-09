@@ -1,6 +1,5 @@
 import { AsyncLocalStorage } from "async_hooks";
 import { IPubStorage } from "../types/api-type";
-import { Partial } from "@sinclair/typebox";
 
 const _asyncLocalStorage = new AsyncLocalStorage<IPubStorage | Partial<IPubStorage>>();
 

@@ -1,4 +1,4 @@
-import { Static } from "@sinclair/typebox";
+import { z } from "zod";
 import { UserAuth } from "../schemas/user-schema";
 
 export interface IUserRepository {
@@ -10,4 +10,4 @@ export interface IPayloadJWT {
   createdAt: Date
 }
 
-export type UserAuthType = Static<typeof UserAuth>;
+export type UserAuthType = z.infer<typeof UserAuth>;

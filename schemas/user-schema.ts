@@ -1,6 +1,6 @@
-import { Static, Type } from "@sinclair/typebox";
+import { z } from "zod";
 
-export const UserAuth = Type.Object({
-  user: Type.String(),
-  password: Type.String()
-});
+export const UserAuth = z.object({
+  user: z.string(),
+  password: z.string()
+})

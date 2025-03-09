@@ -7,6 +7,8 @@ import { AuthenticationUserUseCase } from "../../use-cases/user/authentication-u
 export function authenticationUserRoute(app: FastifyInstance) {
   app.post<{ Body: UserAuthType, Reply: ApiResponseType }>('/auth', {
     schema: {
+      description: "User authentication",
+      tags: ["user"],
       body: UserAuth,
       response: {
         200: ApiResponse
