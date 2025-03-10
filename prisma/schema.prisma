@@ -4,6 +4,11 @@
 // Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
+enum CategoryType {
+  REVENUE
+  EXPENSE
+}
+
 generator client {
   provider        = "prisma-client-js"
   previewFeatures = ["driverAdapters"]
@@ -18,15 +23,32 @@ model User {
   username  String   @id @unique @db.Char(40)
   password  String   @db.VarChar()
   createdAt DateTime @default(now())
+  Entry     Entry[]
 }
 
 model Person {
-  id       String @id @default(uuid())
-  name     String @db.Char(80)
-  nickname String @db.Char(80)
+  id       String  @id @default(uuid())
+  name     String  @db.Char(80)
+  nickname String  @db.Char(80)
+  Entry    Entry[]
 }
 
 model Category {
-  id          String @id @default(uuid())
-  description String @db.Char(80)
+  id          String       @id @default(uuid())
+  description String       @db.Char(80)
+  Entry       Entry[]
+  type        CategoryType @default(EXPENSE)
+}
+
+model Entry {
+  id          String   @id @default(uuid())
+  created_at  DateTime @default(now()) @db.Date()
+  issue_date  DateTime @db.Date()
+  user        User     @relation(fields: [fk_user], references: [username])
+  fk_user     String
+  category    Category @relation(fields: [fk_category], references: [id])
+  fk_category String
+  gross_value Decimal  @default(0)
+  person      Person   @relation(fields: [fk_person], references: [id])
+  fk_person   String
 }
