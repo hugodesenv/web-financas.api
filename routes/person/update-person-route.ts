@@ -8,9 +8,9 @@ import { UpdatePersonUseCase } from "../../use-cases/person/update-person-use-ca
 export function updatePersonRoute(app: FastifyInstance) {
   app.put('/', {
     schema: {
-      description: 'Update person',
+      description: 'Atualização de pessoa',
       body: UpdatePersonSchema,
-      tags: ['person'],
+      tags: ['pessoa'],
     }
   }, async (req: FastifyRequest<{ Body: UpdatePersonType }>, rep: FastifyReply) => {
     try {

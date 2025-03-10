@@ -8,8 +8,8 @@ import { PersonRepository } from "../../repository/person-repository";
 export function deletePersonRoute(app: FastifyInstance) {
   app.delete('/', {
     schema: {
-      tags: ['person'],
-      description: "Delete person",
+      tags: ['pessoa'],
+      description: "Exclusão de pessoa",
       body: DeletePersonSchema,
     },
   }, async (req: FastifyRequest<{ Body: DeletePersonType }>, rep: FastifyReply) => {

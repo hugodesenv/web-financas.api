@@ -11,6 +11,9 @@ import { createPersonRoute } from "./routes/person/create-person-route";
 import { authenticationUserRoute } from "./routes/user/authentication-user-route";
 import { API_CONFIG, JWT_SECRET } from "./utils/env-util";
 import { deletePersonRoute } from "./routes/person/delete-person-route";
+import { createCategoryRoute } from "./routes/category/create-category-route";
+import { updateCategoryRoute } from "./routes/category/update-category-route";
+import { deleteCategoryRoute } from "./routes/category/delete-category-route";
 const { port } = API_CONFIG();
 
 const app = fastify();
@@ -19,6 +22,7 @@ const app = fastify();
 app.setValidatorCompiler(validatorCompiler);
 app.setSerializerCompiler(serializerCompiler);
 
+// Json Web Token
 app.register(fastifyJwt, { secret: JWT_SECRET() });
 
 // Swagger
@@ -37,6 +41,10 @@ app.addHook('onRequest', (_, __, next) => {
 const privateRoutes = async (fastify: FastifyInstance, _opts: any) => {
   fastify.addHook('preHandler', (req: any, res: any, next: any) => { authMiddleware(req, res, next) });
 
+  fastify.register(createCategoryRoute, { prefix: '/category' });
+  fastify.register(updateCategoryRoute, { prefix: '/category' });
+  fastify.register(deleteCategoryRoute, { prefix: '/category' });
+
   fastify.register(createPersonRoute, { prefix: '/person' });
   fastify.register(updatePersonRoute, { prefix: '/person' });
   fastify.register(deletePersonRoute, { prefix: '/person' });
@@ -45,41 +53,14 @@ const privateRoutes = async (fastify: FastifyInstance, _opts: any) => {
 // Public routes
 const publicRoutes = (fastify: FastifyInstance, _opts: any) => {
   fastify.register(authenticationUserRoute, { prefix: '/user' });
-
-  /** By HUGO SOUZA - Studying about openAI API.
-   * In this case, the user pass a rule to the API to create a SQL of clients.
-   * This event will returning to the owner.
-   
-  fastify.post('/openai-example', async (request) => {
-    const { text } = request.body as { text: string };
-    const openai_completion = openai.chat.completions.create({
-      model: "gpt-4o-mini",
-      store: true,
-      messages: [
-        ...rules_system,
-        {
-          role: "user",
-          content: [
-            {
-              type: "text",
-              text
-            }
-          ]
-        }
-      ],
-    });
-
-    const api_result = await openai_completion;
-    return api_result.choices[0].message;
-  });
-  */
+  //--> routes here.
 };
 
 // Scope routes
 app.register(privateRoutes);
 app.register(publicRoutes);
 
-// Starting api
+// Starting
 app.listen({ port }, (err, address) => {
   if (err) {
     console.error(err);

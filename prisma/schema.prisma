@@ -25,3 +25,8 @@ model Person {
   name     String @db.Char(80)
   nickname String @db.Char(80)
 }
+
+model Category {
+  id          String @id @default(uuid())
+  description String @db.Char(80)
+}

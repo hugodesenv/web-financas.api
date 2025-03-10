@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { ConnectDbUseCase } from "../use-cases/db/connect.db.use.case";
+import { ConnectDbUseCase } from "../use-cases/db/connect-db-use-case";
 import { IPayloadJWT } from "./user-type";
 
 export const ApiResponse = z.object({

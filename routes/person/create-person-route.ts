@@ -9,8 +9,8 @@ export function createPersonRoute(app: FastifyInstance) {
 
   app.post<{ Body: CreatePersonType }>('/', {
     schema: {
-      description: 'Create person',
-      tags: ['person'],
+      description: 'Cadastro de pessoa',
+      tags: ['pessoa'],
       body: CreatePersonSchema,
     }
   }, async (request: FastifyRequest<{ Body: CreatePersonType }>, reply: FastifyReply) => {
@@ -25,7 +25,7 @@ export function createPersonRoute(app: FastifyInstance) {
 
       return reply.status(201).send(lResponse);
     } catch (e) {
-      reply.status(500).send(<IApiResponse>{ success: false, data: e });
+      return reply.status(500).send(<IApiResponse>{ success: false, data: e });
     }
   })
 }
